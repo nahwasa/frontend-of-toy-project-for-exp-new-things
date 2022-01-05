@@ -1,6 +1,7 @@
 import logo from '../logo.svg';
 import '../css/App.css';
 import Todo from './Todo';
+import {List, Paper} from "@material-ui/core";
 
 
 function App() {
@@ -11,9 +12,14 @@ function App() {
         ]
     }
 
-    let todoItems = state.items.map((item, idx) => (
-       <Todo item={item} key={item.id} />
-    ));
+    var todoItems = state.items.length > 0 && (
+        <Paper style={{ margin:16 }}>
+            <List>
+                {state.items.map((item, idx) => (
+                    <Todo item={item} key={item.id} />
+                ))}
+            </List>
+        </Paper>    );
 
     return (
         <div className="App">
