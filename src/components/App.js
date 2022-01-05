@@ -2,6 +2,7 @@ import logo from '../logo.svg';
 import '../css/App.css';
 import Todo from './Todo';
 import {List, Paper} from "@material-ui/core";
+import AddTodo from "./AddTodo";
 
 
 function App() {
@@ -19,14 +20,17 @@ function App() {
                     <Todo item={item} key={item.id} />
                 ))}
             </List>
-        </Paper>    );
+        </Paper>
+    );
 
     return (
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-
-                {todoItems}
+                <AddTodo />
+                <div className={"TodoList"}>
+                    {todoItems}
+                </div>
 
             </header>
         </div>
