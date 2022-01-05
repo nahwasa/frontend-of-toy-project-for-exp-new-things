@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Checkbox, InputBase, ListItem, ListItemText} from "@material-ui/core";
 
-function Todo({item}) {
+export const Todo = ({item}) => {
     const [state, setState] = useState(item);
 
     return (
@@ -24,5 +24,3 @@ function Todo({item}) {
         </ListItem>
     );
 }
-
-export default Todo;
