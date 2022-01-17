@@ -2,21 +2,22 @@ import React, {useState} from 'react';
 import {Button, Grid, Paper, TextField} from "@material-ui/core";
 
 export const AddTodo = ({add}) => {
-    const [state, setState] = useState({title: ""});
+    const EMPTY_STR = "";
+    const [title, setTitle] = useState(EMPTY_STR);
 
-    let onInputChange = (e) => {
-        setState({title: e.target.value});
+    let onInputChanged = (e) => {
+        setTitle(e.target.value);
     }
 
-    let onButtonClick = () => {
-        console.log(state.title);
-        add(state.title);
-        setState({title: ""});
+    let onButtonClicked = () => {
+        add(title);
+        setTitle(EMPTY_STR);
     }
 
     let onEnterKeyPressed = (e) => {
-        if (e.key === 'Enter')
-            onButtonClick();
+        if (e.key === 'Enter') {
+            onButtonClicked();
+        }
     }
 
     return (
@@ -25,10 +26,10 @@ export const AddTodo = ({add}) => {
                 <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
                     <TextField
                         plcaholder="Add Todo here"
-                        onChange={onInputChange}
+                        onChange={onInputChanged}
                         onKeyPress={onEnterKeyPressed}
                         fullWidth
-                        value={state.title}
+                        value={title}
                     />
                 </Grid>
                 <Grid xs={1} md={1} item>
@@ -36,7 +37,7 @@ export const AddTodo = ({add}) => {
                         fullWidth
                         color={"secondary"}
                         variant={"outlined"}
-                        onClick={onButtonClick}>
+                        onClick={onButtonClicked}>
                         +
                     </Button>
                 </Grid>

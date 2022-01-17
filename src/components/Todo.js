@@ -3,27 +3,55 @@ import {Checkbox, IconButton, InputBase, ListItem, ListItemSecondaryAction, List
 import {DeleteOutlined} from "@material-ui/icons";
 
 export const Todo = ({item, del}) => {
-    const [state, setState] = useState(item);
+    const [todoItem, setTodoItem] = useState(item);
+    const [readOnly, setReadOnly] = useState(true);
 
     let onDeleteClicked = () => {
-        del(state);
+        del(todoItem);
+    }
+
+    let onTitleClicked = () => {
+        setReadOnly(false);
+    }
+
+    let onEnterKeyPressed = e => {
+        if (e.key === 'Enter') {
+            setReadOnly(true);
+        }
+    }
+
+    let onTitleChanged = e => {
+        let cur = Object.assign({}, todoItem);
+        cur.title = e.target.value;
+        setTodoItem(cur);
+    }
+
+    let onCheckboxChanged = e => {
+        let cur = Object.assign({}, todoItem);
+        cur.done = !cur.done;
+        setTodoItem(cur);
     }
 
     return (
         <ListItem>
             <Checkbox
-                defaultChecked={state.done}
-                // checked={state.done}
+                checked={todoItem.done} onChange={onCheckboxChanged}
             />
             <ListItemText>
                 <InputBase
-                    inputProps={{"aria-label":"naked"}}
+                    inputProps={{
+                        "aria-label":"naked",
+                        readOnly: readOnly
+                    }}
                     type={"text"}
-                    id={state.id}
-                    name={state.id}
-                    value={state.title}
+                    id={todoItem.id}
+                    name={todoItem.id}
+                    value={todoItem.title}
                     multiline={true}
                     fullWidth={true}
+                    onClick={onTitleClicked}
+                    onKeyPress={onEnterKeyPressed}
+                    onChange={onTitleChanged}
                 />
             </ListItemText>
 
