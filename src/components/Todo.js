@@ -4,25 +4,54 @@ import {DeleteOutlined} from "@material-ui/icons";
 
 export const Todo = ({item, del}) => {
     const [todoItem, setTodoItem] = useState(item);
+    const [readOnly, setReadOnly] = useState(true);
 
     let onDeleteClicked = () => {
         del(todoItem);
     }
 
+    let onTitleClicked = () => {
+        setReadOnly(false);
+    }
+
+    let onEnterKeyPressed = e => {
+        if (e.key === 'Enter') {
+            setReadOnly(true);
+        }
+    }
+
+    let onTitleChanged = e => {
+        let cur = Object.assign({}, todoItem);
+        cur.title = e.target.value;
+        setTodoItem(cur);
+    }
+
+    let onCheckboxChanged = e => {
+        let cur = Object.assign({}, todoItem);
+        cur.done = !cur.done;
+        setTodoItem(cur);
+    }
+
     return (
         <ListItem>
             <Checkbox
-                defaultChecked={todoItem.done}
+                checked={todoItem.done} onChange={onCheckboxChanged}
             />
             <ListItemText>
                 <InputBase
-                    inputProps={{"aria-label":"naked"}}
+                    inputProps={{
+                        "aria-label":"naked",
+                        readOnly: readOnly
+                    }}
                     type={"text"}
                     id={todoItem.id}
                     name={todoItem.id}
                     value={todoItem.title}
                     multiline={true}
                     fullWidth={true}
+                    onClick={onTitleClicked}
+                    onKeyPress={onEnterKeyPressed}
+                    onChange={onTitleChanged}
                 />
             </ListItemText>
 

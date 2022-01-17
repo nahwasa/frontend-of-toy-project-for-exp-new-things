@@ -10,17 +10,19 @@ const App = () => {
     const [todoItems, setTodoItems] = useState({
         items : []
     });
+    const [seq, setSeq] = useState(0);
 
     let add = title => {
         let cur = Object.assign({}, todoItems);
 
         let tmp = {
-            id: "ID-" + todoItems.items.length,
+            id: "ID-" + seq,
             done: false,
             title: title
         };
         cur.items.push(tmp);
 
+        setSeq(seq+1);
         setTodoItems(cur);
     };
 

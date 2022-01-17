@@ -5,18 +5,19 @@ export const AddTodo = ({add}) => {
     const EMPTY_STR = "";
     const [title, setTitle] = useState(EMPTY_STR);
 
-    let onInputChange = (e) => {
+    let onInputChanged = (e) => {
         setTitle(e.target.value);
     }
 
-    let onButtonClick = () => {
+    let onButtonClicked = () => {
         add(title);
         setTitle(EMPTY_STR);
     }
 
     let onEnterKeyPressed = (e) => {
-        if (e.key === 'Enter')
-            onButtonClick();
+        if (e.key === 'Enter') {
+            onButtonClicked();
+        }
     }
 
     return (
@@ -25,7 +26,7 @@ export const AddTodo = ({add}) => {
                 <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
                     <TextField
                         plcaholder="Add Todo here"
-                        onChange={onInputChange}
+                        onChange={onInputChanged}
                         onKeyPress={onEnterKeyPressed}
                         fullWidth
                         value={title}
@@ -36,7 +37,7 @@ export const AddTodo = ({add}) => {
                         fullWidth
                         color={"secondary"}
                         variant={"outlined"}
-                        onClick={onButtonClick}>
+                        onClick={onButtonClicked}>
                         +
                     </Button>
                 </Grid>
