@@ -1,43 +1,45 @@
 import logo from '../logo.svg';
 import '../css/App.css';
-import {Todo} from './Todo';
 import {List, Paper} from "@material-ui/core";
-import {AddTodo} from "./AddTodo";
 import {useState} from "react";
 
+import {Todo} from './Todo';
+import {AddTodo} from "./AddTodo";
 
 const App = () => {
-
-    const [state, setState] = useState({
+    const [todoItems, setTodoItems] = useState({
         items : []
     });
 
-    let add = (title) => {
-        let thisItems = state.items;
+    let add = title => {
+        let cur = Object.assign({}, todoItems);
+
         let tmp = {
-            id: "ID-" + thisItems.length,
+            id: "ID-" + todoItems.items.length,
             done: false,
             title: title
         };
-        thisItems.push(tmp);
-        setState({items: thisItems});
+        cur.items.push(tmp);
+
+        setTodoItems(cur);
     };
 
-    let del = (item) => {
-        let thisItems = state.items;
-        let newItems = thisItems.filter(e => e.id !== item.id);
-        setState({items: newItems});
+    let del = item => {
+        let cur = Object.assign({}, todoItems);
+        cur.items = cur.items.filter(e=>e.id != item.id);
+        setTodoItems(cur);
     };
 
-    let todoItems = state.items.length > 0 && (
+    let todoList = todoItems.items.length > 0 &&
         <Paper style={{ margin:16 }}>
             <List>
-                {state.items.map((item, idx) => (
-                    <Todo item={item} key={item.id} del={del} />
-                ))}
+                {todoItems.items.map(value =>
+                    typeof value == 'object' ? <Todo item={value} key={value.id} del={del} /> : false
+                )}
             </List>
         </Paper>
-    );
+    ;
+
 
     return (
         <div className="App">
@@ -45,7 +47,7 @@ const App = () => {
                 <img src={logo} className="App-logo" alt="logo"/>
                 <AddTodo add={add}/>
                 <div className={"TodoList"}>
-                    {todoItems}
+                    {todoList}
                 </div>
 
             </header>

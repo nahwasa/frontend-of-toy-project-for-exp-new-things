@@ -3,25 +3,24 @@ import {Checkbox, IconButton, InputBase, ListItem, ListItemSecondaryAction, List
 import {DeleteOutlined} from "@material-ui/icons";
 
 export const Todo = ({item, del}) => {
-    const [state, setState] = useState(item);
+    const [todoItem, setTodoItem] = useState(item);
 
     let onDeleteClicked = () => {
-        del(state);
+        del(todoItem);
     }
 
     return (
         <ListItem>
             <Checkbox
-                defaultChecked={state.done}
-                // checked={state.done}
+                defaultChecked={todoItem.done}
             />
             <ListItemText>
                 <InputBase
                     inputProps={{"aria-label":"naked"}}
                     type={"text"}
-                    id={state.id}
-                    name={state.id}
-                    value={state.title}
+                    id={todoItem.id}
+                    name={todoItem.id}
+                    value={todoItem.title}
                     multiline={true}
                     fullWidth={true}
                 />

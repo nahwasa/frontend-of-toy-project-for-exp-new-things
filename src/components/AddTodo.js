@@ -2,16 +2,16 @@ import React, {useState} from 'react';
 import {Button, Grid, Paper, TextField} from "@material-ui/core";
 
 export const AddTodo = ({add}) => {
-    const [state, setState] = useState({title: ""});
+    const EMPTY_STR = "";
+    const [title, setTitle] = useState(EMPTY_STR);
 
     let onInputChange = (e) => {
-        setState({title: e.target.value});
+        setTitle(e.target.value);
     }
 
     let onButtonClick = () => {
-        console.log(state.title);
-        add(state.title);
-        setState({title: ""});
+        add(title);
+        setTitle(EMPTY_STR);
     }
 
     let onEnterKeyPressed = (e) => {
@@ -28,7 +28,7 @@ export const AddTodo = ({add}) => {
                         onChange={onInputChange}
                         onKeyPress={onEnterKeyPressed}
                         fullWidth
-                        value={state.title}
+                        value={title}
                     />
                 </Grid>
                 <Grid xs={1} md={1} item>
