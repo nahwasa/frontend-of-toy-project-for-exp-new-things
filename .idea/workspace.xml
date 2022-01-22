@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0eb9a98a-c289-4f35-ba97-67afe02fc51c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddTodo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTodo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Todo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Todo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +55,9 @@
       <option name="presentableId" value="Default" />
       <updated>1642249199228</updated>
       <workItem from="1642249200664" duration="5187000" />
-      <workItem from="1642420538444" duration="4863000" />
+      <workItem from="1642420538444" duration="10886000" />
+      <workItem from="1642570046582" duration="1037000" />
+      <workItem from="1642748996043" duration="617000" />
     </task>
     <servers />
   </component>
