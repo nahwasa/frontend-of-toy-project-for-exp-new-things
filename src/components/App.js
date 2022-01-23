@@ -3,6 +3,7 @@ import '../css/App.css';
 import axios from "axios";
 import {List, Paper} from "@material-ui/core";
 import {useState, useEffect} from "react";
+import {call} from "../service/AppService";
 
 import {Todo} from './Todo';
 import {AddTodo} from "./AddTodo";
@@ -17,9 +18,13 @@ const App = () => {
     // effect
     useEffect(() => {
         (async () => {
-            let response = await axios.get("http://localhost:8080/todo");
+            let response = await call("/todo", "GET", null);
             setTodoItems({items: response.data.data});
         })();
+
+        // async-await 사용 안하려면 이렇게.
+        // call("/todo", "GET", null)
+        //     .then(response => setTodoItems({items: response.data.data}));
     }, []);
 
 
