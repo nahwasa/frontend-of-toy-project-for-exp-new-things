@@ -2,7 +2,7 @@ import logo from '../logo.svg';
 import '../css/App.css';
 import axios from "axios";
 import {List, Paper} from "@material-ui/core";
-import {useEffect, useState} from "react";
+import {useState, useEffect} from "react";
 
 import {Todo} from './Todo';
 import {AddTodo} from "./AddTodo";
@@ -17,12 +17,8 @@ const App = () => {
     // effect
     useEffect(() => {
         (async () => {
-            try {
-                let response = await axios.get('http://localhost:8080/todo');
-                setTodoItems(response.data);
-            } catch(err) {
-                alert(`[ERROR] GET /todo : ${err}`);
-            }
+            let response = await axios.get("http://localhost:8080/todo");
+            setTodoItems({items: response.data.data});
         })();
     }, []);
 
