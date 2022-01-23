@@ -1,16 +1,27 @@
 import logo from '../logo.svg';
 import '../css/App.css';
+import axios from "axios";
 import {List, Paper} from "@material-ui/core";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 import {Todo} from './Todo';
 import {AddTodo} from "./AddTodo";
 
 const App = () => {
+    // state
     const [todoItems, setTodoItems] = useState({
         items : []
     });
     const [seq, setSeq] = useState(0);
+
+    // effect
+    useEffect(() => {
+        (async () => {
+            let response = await axios.get("http://localhost:8080/todo");
+            setTodoItems({items: response.data.data});
+        })();
+    }, []);
+
 
     let add = title => {
         let cur = Object.assign({}, todoItems);
@@ -36,7 +47,7 @@ const App = () => {
         <Paper style={{ margin:16 }}>
             <List>
                 {todoItems.items.map(value =>
-                    typeof value == 'object' ? <Todo item={value} key={value.id} del={del} /> : false
+                    <Todo item={value} key={value.id} del={del} />
                 )}
             </List>
         </Paper>
