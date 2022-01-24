@@ -1,12 +1,12 @@
 import logo from '../logo.svg';
 import '../css/App.css';
-import axios from "axios";
 import {List, Paper} from "@material-ui/core";
 import {useState, useEffect} from "react";
 import {call} from "../service/AppService";
 
 import {Todo} from './Todo';
 import {AddTodo} from "./AddTodo";
+import axios from "axios";
 
 const App = () => {
     // state
@@ -21,31 +21,22 @@ const App = () => {
             let response = await call("/todo", "GET", null);
             setTodoItems({items: response.data.data});
         })();
-
-        // async-await 사용 안하려면 이렇게.
-        // call("/todo", "GET", null)
-        //     .then(response => setTodoItems({items: response.data.data}));
     }, []);
 
 
     let add = title => {
-        let cur = Object.assign({}, todoItems);
-
-        let tmp = {
-            id: "ID-" + seq,
-            done: false,
-            title: title
-        };
-        cur.items.push(tmp);
-
-        setSeq(seq+1);
-        setTodoItems(cur);
+        (async () => {
+            let response = await call("/todo", "POST", {title: title});
+            setTodoItems({items: response.data.data});
+            setSeq(seq+1);
+        })();
     };
 
     let del = item => {
-        let cur = Object.assign({}, todoItems);
-        cur.items = cur.items.filter(e=>e.id != item.id);
-        setTodoItems(cur);
+        (async () => {
+            let response = await call("/todo", "DELETE", item);
+            setTodoItems({items: response.data.data});
+        })();
     };
 
     let todoList = todoItems.items.length > 0 &&
