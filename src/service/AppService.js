@@ -3,8 +3,9 @@ import axios from "axios";
 
 export const call = (api, method, request={}) =>
     axios({
-            baseURL: API_BASE_URL,
-            url: api,
-            method: method,
-            body: request
-        });
+        baseURL: API_BASE_URL,
+        url: api,
+        method: method,
+        data: request
+    });
+
