@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Checkbox, IconButton, InputBase, ListItem, ListItemSecondaryAction, ListItemText} from "@material-ui/core";
 import {DeleteOutlined} from "@material-ui/icons";
 
-export const Todo = ({item, del}) => {
+export const Todo = ({item, update, del}) => {
     const [todoItem, setTodoItem] = useState(item);
     const [readOnly, setReadOnly] = useState(true);
 
@@ -24,12 +24,14 @@ export const Todo = ({item, del}) => {
         let cur = Object.assign({}, todoItem);
         cur.title = e.target.value;
         setTodoItem(cur);
+        update(cur);
     }
 
     let onCheckboxChanged = e => {
         let cur = Object.assign({}, todoItem);
         cur.done = !cur.done;
         setTodoItem(cur);
+        update(cur);
     }
 
     return (

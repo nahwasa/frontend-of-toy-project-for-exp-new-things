@@ -31,6 +31,13 @@ const App = () => {
         })();
     };
 
+    let update = item => {
+        (async () => {
+            let response = await call("/todo", "PUT", item);
+            setTodoItems(response.data);
+        })();
+    };
+
     let del = item => {
         (async () => {
             let response = await call("/todo", "DELETE", item);
@@ -42,7 +49,7 @@ const App = () => {
         <Paper style={{ margin:16 }}>
             <List>
                 {todoItems.data.map(value =>
-                    <Todo item={value} key={value.id} del={del} />
+                    <Todo item={value} key={value.id} update={update} del={del} />
                 )}
             </List>
         </Paper>
