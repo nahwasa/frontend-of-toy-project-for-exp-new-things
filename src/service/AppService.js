@@ -7,5 +7,10 @@ export const call = (api, method, request={}) =>
         url: api,
         method: method,
         data: request
+    }).catch((e) => {
+        alert("로그인이 필요합니다.");
+        if (e.response.status === 403) {
+            window.location.href = "/login";
+        }
     });
 
