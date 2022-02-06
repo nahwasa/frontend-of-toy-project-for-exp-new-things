@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {signin} from "./service/ApiService";
-import {Button, Container, Grid, TextField, Typography} from "@material-ui/core";
+import {signin} from "../service/ApiService";
+import {Button, Container, Grid, Link, TextField, Typography} from "@material-ui/core";
 
 export const Login = () => {
     let handleSubmit = (event) => {
@@ -58,6 +58,11 @@ export const Login = () => {
                             로그인
                         </Button>
                     </Grid>
+
+                    <Link href={"/signup"} variant={"body2"} style={{marginTop: "6%"}}>
+                        <Grid item>계정이 없다면 여기서 회원가입 하세요.</Grid>
+                    </Link>
+
                 </Grid>
             </form>
         </Container>
