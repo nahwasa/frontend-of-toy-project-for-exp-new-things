@@ -42,3 +42,8 @@ export const signin = (userDTO) => {
         }
     })();
 }
+
+export const logout = () => {
+    localStorage.setItem(ACCESS_TOKEN_KEY, null);
+    window.location.href = "/login";
+}
