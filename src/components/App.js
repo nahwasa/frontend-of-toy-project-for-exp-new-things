@@ -1,8 +1,8 @@
 import logo from '../logo.svg';
 import '../css/App.css';
-import {List, Paper} from "@material-ui/core";
+import {AppBar, Button, Container, Grid, List, Paper, Toolbar, Typography} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
-import {call} from "../service/ApiService";
+import {call, logout} from "../service/ApiService";
 
 import {Todo} from './Todo';
 import {AddTodo} from "./AddTodo";
@@ -55,17 +55,39 @@ const App = () => {
         </Paper>
     ;
 
+    let navigationBar = () => {
+        return (
+            <AppBar position={"static"}>
+                <Toolbar>
+                    <Grid justifyContent={"space-between"} container>
+                        <Grid item>
+                            <Typography variant={"h6"}>
+                                오늘의 할일
+                            </Typography>
+                        </Grid>
+                        <Grid>
+                            <Button color={"inherit"} onClick={logout}>
+                                로그아웃
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Toolbar>
+            </AppBar>
+        );
+    }
 
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
+            {navigationBar()}
+
+            <img src={logo} className="App-logo" alt="logo"/>
+
+            <Container maxWidth={"md"}>
                 <AddTodo add={add}/>
                 <div className={"TodoList"}>
                     {todoList}
                 </div>
-
-            </header>
+            </Container>
         </div>
     );
 }
