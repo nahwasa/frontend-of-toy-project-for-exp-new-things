@@ -25,7 +25,6 @@ export const call = (api, method, request={}) =>
         headers: getCallHeaders()
     }).catch((e) => {
         console.log("error : " + e);
-        alert("로그인이 필요합니다.");
         if (e.response.status === 403) {
             window.location.href = "/login";
         }
@@ -36,7 +35,7 @@ export const signin = (userDTO) => {
         let response = await call("/auth/signin", "POST", userDTO);
         console.log("response : ", response);
 
-        if (response.data.token) {
+        if (response?.data?.token) {
             localStorage.setItem(ACCESS_TOKEN_KEY, response.data.token);
             window.location.href = "/";
         }
