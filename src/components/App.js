@@ -2,7 +2,7 @@ import logo from '../logo.svg';
 import '../css/App.css';
 import {List, Paper} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
-import {call} from "../service/AppService";
+import {call} from "../service/ApiService";
 
 import {Todo} from './Todo';
 import {AddTodo} from "./AddTodo";
