@@ -13,12 +13,14 @@ const App = () => {
         data : []
     });
     const [seq, setSeq] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     // effect
     useEffect(() => {
         (async () => {
             let response = await call("/todo", "GET", null);
             setTodoItems(response.data);
+            setLoading(false);
         })();
     }, []);
 
@@ -76,20 +78,29 @@ const App = () => {
         );
     }
 
-    return (
-        <div className="App">
-            {navigationBar()}
+    // 로딩중일 땐 다른 화면이 뜨도록
+    if (loading) {
+        return (
+            <div className="App">
+                <h1>Loading...</h1>
+            </div>
+        );
+    } else {
+        return (
+            <div className="App">
+                {navigationBar()}
 
-            <img src={logo} className="App-logo" alt="logo"/>
+                <img src={logo} className="App-logo" alt="logo"/>
 
-            <Container maxWidth={"md"}>
-                <AddTodo add={add}/>
-                <div className={"TodoList"}>
-                    {todoList}
-                </div>
-            </Container>
-        </div>
-    );
+                <Container maxWidth={"md"}>
+                    <AddTodo add={add}/>
+                    <div className={"TodoList"}>
+                        {todoList}
+                    </div>
+                </Container>
+            </div>
+        );
+    }
 }
 
 export default App;
