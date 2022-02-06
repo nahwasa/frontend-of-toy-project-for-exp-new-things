@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
-import {AppRouter} from "./AppRouter";
+import {AppRouter} from "./components/AppRouter";
 
 ReactDOM.render(
   <React.StrictMode>

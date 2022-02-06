@@ -1,4 +1,4 @@
-import {API_BASE_URL} from "../app-config";
+import {API_BASE_URL} from "../config/app-config";
 import axios from "axios";
 
 const ACCESS_TOKEN_KEY = "ACCESS_TOKEN";
@@ -30,6 +30,17 @@ export const call = (api, method, request={}) =>
         }
     });
 
+export const signup = (userDTO) => {
+    (async () => {
+        let response = await call("/auth/signup", "POST", userDTO);
+        console.log("signup response : " + response);
+
+        if (response) {
+            window.location.href = "/login";
+        }
+    })();
+}
+
 export const signin = (userDTO) => {
     (async () => {
         let response = await call("/auth/signin", "POST", userDTO);
@@ -38,6 +49,8 @@ export const signin = (userDTO) => {
         if (response?.data?.token) {
             localStorage.setItem(ACCESS_TOKEN_KEY, response.data.token);
             window.location.href = "/";
+        } else {
+            alert("이메일 혹은 패스워드를 확인하세요.");
         }
     })();
 }
